@@ -1,0 +1,97 @@
+		.jtimeline table{
+			table-layout: fixed;
+			border-collapse: collapse;
+			border-spacing: 0;
+		}
+		.jtimeline td{
+			text-align: center;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow:ellipsis;
+		}
+		.jtimeline th{
+			text-align: left;
+			white-space: nowrap;
+			height: 20px;
+			line-height: 20px;
+		}
+		.jtimeline-row {
+			position: relative;
+			height:40px;
+		}
+		.multi-jtimeline-row{
+			position: relative;
+			margin-bottom: 20px;
+		}
+		.multi-jtimeline-each-row{
+			position: relative;
+			height:28px;
+		}
+		.jtimeline-bg,
+		.jtimeline-content-skeleton{
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+		}
+		.jtimeline-row .jtimeline-bg,
+		.jtimeline-row .jtimeline-content-skeleton{
+			margin:10px 0;
+		}
+		.multi-jtimeline-each-row .jtimeline-bg,
+		.multi-jtimeline-row .jtimeline-content-skeleton table{
+			margin:4px 0;
+		}
+		.multi-jtimeline-row .jtimeline-content-skeleton{
+			height:100%;
+		}
+		.jtimeline-content-skeleton td{
+			cursor: pointer;
+			height:18px;
+			line-height:18px;
+			border-radius:3px;
+			color:white;
+			font-size: 12px;
+		}
+		.jtimeline-row .jtimeline-bg,
+		.multi-jtimeline-row .jtimeline-bg{
+			z-index: 1;
+		}
+		.jtimeline-row .jtimeline-content-skeleton,
+		.multi-jtimeline-row .jtimeline-content-skeleton{
+			z-index: 3;
+		}
+		.jtimeline-title,
+		.multi-jtimeline-title{
+			width:150px;
+			float:left;
+		}
+		.jtimeline-title div{
+			margin:10px 0;
+			width:150px;
+		}
+		.multi-jtimeline-title div{
+			width:150px;
+			height: 28px;
+			line-height: 28px;
+		}
+		.multi-jtimeline-title tr{
+			height: 20px;
+		}
+		.jtimeline-content{
+			overflow:hidden;
+		}
+		.jtimeline-content table{
+			width: 100%;
+		}
+		.jtimeline-unselect{
+			background-color:#E9F5DD;
+			height:18px;
+			line-height:18px;
+		}
+		.jtimeline-related{
+			background-color:#548135;
+		}
+		.jtimeline-claim{
+			background-color:#FFC000;
+		}

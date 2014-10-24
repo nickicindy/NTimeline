@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Timeline Widget</title>
+	<script type="text/javascript" src="./script/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="./script/jquery.timeline.js"></script>
+	<link rel="stylesheet" type="text/css" href="./style/jquery.timeline.css">
+</head>
+<body>
+	<div style="width:1100px;margin:0 auto;" class="jtimeline" id="timeline"></div>
+	<div id="layer" style="margin-top:80px;"></div>
+	<div style="clear:both;"></div>
+	<div style="width:1100px;margin:0 auto;" class="jtimeline" id="multitimeline"></div>	
+	<div id="multilayer" style="margin-top:80px;"></div>
+	<script>
+		$(document).ready(function(){
+			var data = [{
+					id:'1002',
+					name:'1002 仓库2',
+					value:{
+						'10020001':{
+							status:3,
+							begin:'2014-08-01',
+							end:'2014-08-02',
+							text:'测试一下'
+						},
+						'10020002':{
+							status:2,
+							begin:'2014-08-06',
+							end:'2014-08-31',
+							text:'已认领'
+						}
+					},
+					begin:{
+						'2014-08-01':'10020001',
+						'2014-08-06':'10020002'
+					}
+
+				},
+				{
+					id:'1003',
+					name:'1003 仓库3',
+					value:{
+						'10030001':{
+							status:3,
+							begin:'2014-08-02',
+							end:'2014-08-04',
+							text:'测试一下'
+						},
+						'10030002':{
+							status:2,
+							begin:'2014-08-06',
+							end:'2014-08-08',
+							text:'已认领'
+						}
+					},
+					begin:{
+						'2014-08-02':'10030001',
+						'2014-08-06':'10030002'
+					}
+
+				},
+				{
+					id:'1004',
+					name:'1004 仓库4',
+					value:{
+						'10040001':{
+							status:2,
+							begin:'2014-08-03',
+							end:'2014-08-06',
+							text:'已认领'
+						}
+					},
+					begin:{
+						'2014-08-03':'10040001'
+					}
+
+				},
+				{
+					id:'1005',
+					name:'1005 仓库5',
+					value:{},
+					begin:{}
+				}];
+
+			var multi_data = [{
+					id:'880630',
+					name:[{
+							text:'默认规则',
+							value:'0'
+						},{
+							text:'全国',
+							value:'1,'
+						},{
+							text:'上海',
+							value:'1,018'
+					}],
+					value:{
+						'8806300001':{
+							status:2,
+							begin:'2014-08-03',
+							end:'2014-08-16',
+							text:'已认领'
+						}
+					},
+					begin:{
+						'2014-08-03':'8806300001'
+					}
+				},{
+					id:'881207',
+					name:[{
+							text:'默认规则',
+							value:'0'
+						},{
+							text:'全国',
+							value:'1,'
+						},{
+							text:'上海',
+							value:'1,018'
+					}],
+					value:{
+						'88120700001':{
+							status:3,
+							begin:'2014-08-03',
+							end:'2014-08-06',
+							text:'已关联'
+						},
+						'88120700002':{
+							status:2,
+							begin:'2014-08-13',
+							end:'2014-08-26',
+							text:'已认领'
+						}
+					},
+					begin:{
+						'2014-08-03':'88120700001',
+						'2014-08-13':'88120700002'
+					}
+				}];
+
+			var clickFunc = function(value){
+                $('#layer').empty().append('<select id="status"><option value="1">未关联</option><option value="2" '+(value.status==2?'selected':'')+'>已认领</option><option value="3" '+(value.status==3?'selected':'')+'>已关联</option></select><br>');
+
+                $('#layer').append('<input type="hidden" id="tdindex" value="'+value.tdindex+'">开始时间：<input type="text" id="begin" value="'+value.begin+'"><br>结束时间：<input type="text" id="end" value="'+value.end+'"><button id="confirm">确定</button>');
+            };
+			
+			var multiClickFunc = function(value){
+                $('#multilayer').empty().append('<select id="multistatus"><option value="1">未关联</option><option value="2" '+(value.status==2?'selected':'')+'>已认领</option><option value="3" '+(value.status==3?'selected':'')+'>已关联</option></select><br>');
+
+                $('#multilayer').append('<input type="hidden" id="multitdindex" value="'+value.tdindex+'">开始时间：<input type="text" id="multibegin" value="'+value.begin+'"><br>结束时间：<input type="text" id="multiend" value="'+value.end+'"><button id="confirm">确定</button>');
+            };
+
+            var commitFunc = function(value){
+            	return {id:'1000000',text:'新修改的内容'};
+            };
+
+			var jtl = $('#timeline').jTimeline();
+
+			jtl.single({data:data,click:clickFunc,commit:commitFunc});
+
+			$('#layer').delegate('button','click',function(){
+				var new_value={
+					new_status : parseInt($('#status').val()),
+            		new_begin : $('#begin').val(),
+            		new_end : $('#end').val(),
+            		tdindex : parseInt($('#tdindex').val())
+				};
+
+				jtl.modify(new_value);
+			});
+
+			var muljtl = $('#multitimeline').jTimeline();
+			muljtl.multiple({data:multi_data,click:multiClickFunc,commit:commitFunc});
+			
+			$('#multilayer').delegate('button','click',function(){
+				var new_value={
+					new_status : parseInt($('#multistatus').val()),
+            		new_begin : $('#multibegin').val(),
+            		new_end : $('#multiend').val(),
+            		tdindex : parseInt($('#multitdindex').val())
+				};
+
+				muljtl.modify(new_value);
+			});
+
+		});
+	</script>
+</body>
+</html>
