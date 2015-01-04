@@ -20,13 +20,13 @@
 					name:'1002 仓库2',
 					value:{
 						'10020001':{
-							status:3,
+							status:2,
 							begin:'2014-08-01',
 							end:'2014-08-02',
 							text:'测试一下'
 						},
 						'10020002':{
-							status:2,
+							status:1,
 							begin:'2014-08-06',
 							end:'2014-08-31',
 							text:'已认领'
@@ -35,7 +35,8 @@
 					begin:{
 						'2014-08-01':'10020001',
 						'2014-08-06':'10020002'
-					}
+					},
+					begin_arr:['2014-08-01','2014-08-06']
 
 				},
 				{
@@ -43,13 +44,13 @@
 					name:'1003 仓库3',
 					value:{
 						'10030001':{
-							status:3,
+							status:2,
 							begin:'2014-08-02',
 							end:'2014-08-04',
 							text:'测试一下'
 						},
 						'10030002':{
-							status:2,
+							status:1,
 							begin:'2014-08-06',
 							end:'2014-08-08',
 							text:'已认领'
@@ -58,7 +59,8 @@
 					begin:{
 						'2014-08-02':'10030001',
 						'2014-08-06':'10030002'
-					}
+					},
+					begin_arr:['2014-08-02','2014-08-06']
 
 				},
 				{
@@ -66,7 +68,7 @@
 					name:'1004 仓库4',
 					value:{
 						'10040001':{
-							status:2,
+							status:1,
 							begin:'2014-08-03',
 							end:'2014-08-06',
 							text:'已认领'
@@ -74,14 +76,16 @@
 					},
 					begin:{
 						'2014-08-03':'10040001'
-					}
+					},
+					begin_arr:['2014-08-03']
 
 				},
 				{
 					id:'1005',
 					name:'1005 仓库5',
 					value:{},
-					begin:{}
+					begin:{},
+					begin_arr:[]
 				}];
 
 			var multi_data = [{
@@ -98,7 +102,7 @@
 					}],
 					value:{
 						'8806300001':{
-							status:2,
+							status:1,
 							begin:'2014-08-03',
 							end:'2014-08-16',
 							text:'已认领'
@@ -106,7 +110,8 @@
 					},
 					begin:{
 						'2014-08-03':'8806300001'
-					}
+					},
+					begin_arr:['2014-08-03']
 				},{
 					id:'881207',
 					name:[{
@@ -121,13 +126,13 @@
 					}],
 					value:{
 						'88120700001':{
-							status:3,
+							status:2,
 							begin:'2014-08-03',
 							end:'2014-08-06',
 							text:'已关联'
 						},
 						'88120700002':{
-							status:2,
+							status:1,
 							begin:'2014-08-13',
 							end:'2014-08-26',
 							text:'已认领'
@@ -136,7 +141,8 @@
 					begin:{
 						'2014-08-03':'88120700001',
 						'2014-08-13':'88120700002'
-					}
+					},
+					begin_arr:['2014-08-03','2014-08-13']
 				}];
 
 			var clickFunc = function(value){
@@ -157,7 +163,7 @@
 
 			var jtl = $('#timeline').jTimeline();
 
-			jtl.single({data:data,click:clickFunc,commit:commitFunc});
+			jtl.single({data:data,click:clickFunc});
 
 			$('#layer').delegate('button','click',function(){
 				var new_value={
@@ -170,19 +176,19 @@
 				jtl.modify(new_value);
 			});
 
-			var muljtl = $('#multitimeline').jTimeline();
-			muljtl.multiple({data:multi_data,click:multiClickFunc,commit:commitFunc});
+			// var muljtl = $('#multitimeline').jTimeline();
+			// muljtl.multiple({data:multi_data,click:multiClickFunc});
 			
-			$('#multilayer').delegate('button','click',function(){
-				var new_value={
-					new_status : parseInt($('#multistatus').val()),
-            		new_begin : $('#multibegin').val(),
-            		new_end : $('#multiend').val(),
-            		tdindex : parseInt($('#multitdindex').val())
-				};
+			// $('#multilayer').delegate('button','click',function(){
+			// 	var new_value={
+			// 		new_status : parseInt($('#multistatus').val()),
+   //          		new_begin : $('#multibegin').val(),
+   //          		new_end : $('#multiend').val(),
+   //          		tdindex : parseInt($('#multitdindex').val())
+			// 	};
 
-				muljtl.modify(new_value);
-			});
+			// 	muljtl.modify(new_value);
+			// });
 
 		});
 	</script>
